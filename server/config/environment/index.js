@@ -57,6 +57,12 @@ var all = {
     clientID:     process.env.GITHUB_ID || 'id',
     clientSecret: process.env.GITHUB_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/github/callback'
+  },
+
+  dribbble: {
+    clientID:     process.env.DRIBBBLE_ID || 'id',
+    clientSecret: process.env.DRIBBBLE_SECRET || 'secret',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/dribbble/callback'
   }
 };
 

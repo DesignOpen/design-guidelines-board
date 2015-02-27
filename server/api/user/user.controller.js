@@ -21,20 +21,6 @@ exports.index = function(req, res) {
 };
 
 /**
- * Creates a new user
- */
-exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-  });
-};
-
-/**
  * Get a single user
  */
 exports.show = function (req, res, next) {
@@ -55,27 +41,6 @@ exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
     return res.send(204);
-  });
-};
-
-/**
- * Change a users password
- */
-exports.changePassword = function(req, res, next) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
-
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      user.password = newPass;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-    } else {
-      res.send(403);
-    }
   });
 };
 

@@ -19,10 +19,10 @@
     "mongoose": "~3.8.8",
     "morgan": "~1.0.0",
     "passport": "~0.2.0",
+    "passport-dribbble": "^1.0.1",
     "passport-facebook": "latest",
     "passport-github": "^0.1.5",
     "passport-google-oauth": "latest",
-    "passport-local": "~0.1.6",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
