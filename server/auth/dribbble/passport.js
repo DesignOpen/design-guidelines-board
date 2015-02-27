@@ -14,9 +14,7 @@ exports.setup = function (User, config) {
         if (!user) {
           user = new User({
             name: profile.displayName,
-            email: 'nobody@example.com',
             role: 'user',
-            username: profile.username,
             provider: 'dribbble',
             github: profile._json
           });

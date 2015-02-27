@@ -10,8 +10,6 @@ var UserSchema = new Schema({
     default: 'user'
   },
   provider: String,
-  facebook: {},
-  google: {},
   github: {},
   dribbble: {}
 });

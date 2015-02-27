@@ -14,9 +14,7 @@ exports.setup = function (User, config) {
         if (!user) {
           user = new User({
             name: profile.displayName,
-            email: profile.emails[0].value,
             role: 'user',
-            username: profile.username,
             provider: 'github',
             github: profile._json
           });
