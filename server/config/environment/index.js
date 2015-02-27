@@ -41,18 +41,6 @@ var all = {
     }
   },
 
-  facebook: {
-    clientID:     process.env.FACEBOOK_ID || 'id',
-    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
-  },
-
-  google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
-  },
-
   github: {
     clientID:     process.env.GITHUB_ID || 'id',
     clientSecret: process.env.GITHUB_SECRET || 'secret',
