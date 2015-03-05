@@ -14,7 +14,7 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
+  User.find({}, function (err, users) {
     if(err) return res.send(500, err);
     res.json(200, users);
   });
@@ -51,7 +51,7 @@ exports.me = function(req, res, next) {
   var userId = req.user._id;
   User.findOne({
     _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+  }, function(err, user) {
     if (err) return next(err);
     if (!user) return res.json(401);
     res.json(user);
