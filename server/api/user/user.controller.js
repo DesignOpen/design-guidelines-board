@@ -4,7 +4,6 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
-var github = require('octonode');
 
 
 var validationError = function(res, err) {
@@ -57,25 +56,6 @@ exports.me = function(req, res, next) {
     if (err) return next(err);
     if (!user) return res.json(401);
     res.json(user);
-  });
-};
-
-/**
- * Get my GitHub repos
- */
-exports.myGithubRepos = function(req, res, next) {
-  var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, function(err, user) {
-    if (err) return next(err);
-    if (!user) return res.json(401);
-    if (!user.github.accessToken) return res.json(401);
-    var githubClient = github.client(user.github.accessToken);
-    githubClient.me().repos(function(err, data, headers) {
-      if (err) return next(err);
-      return res.json(data);
-    });
   });
 };
 
