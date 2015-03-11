@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('opendesignboardApp')
-  .controller('NewProjectCtrl', function ($scope, $http, Auth) {
+  .controller('ProjectNewCreateCtrl', function ($scope, $http, Auth) {
     var githubLogin = Auth.getCurrentUser().github.login;
     $scope.githubLogin = githubLogin;
     $scope.repos = {};

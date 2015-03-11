@@ -5,12 +5,27 @@ angular.module('opendesignboardApp')
     $stateProvider
       .state('projects', {
         url: '/projects',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('projects.index', {
+        url: '',
         templateUrl: 'app/projects/projects.html',
         controller: 'ProjectsCtrl'
       })
       .state('projects.new', {
         url: '/new',
-        templateUrl: 'app/projects/new.html',
-        controller: 'NewProjectCtrl'
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('projects.new.list', {
+        url: '',
+        templateUrl: 'app/projects/new.list.html',
+        controller: 'ProjectNewListCtrl'
+      })
+      .state('projects.new.create', {
+        url: '/:owner/:repo',
+        templateUrl: 'app/projects/new.create.html',
+        controller: 'ProjectNewCreateCtrl'
       });
   });

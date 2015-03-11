@@ -23,7 +23,7 @@
       <div ng-include="'components/loading/loading.html'" ng-hide="repos[account]"></div>
       <div ng-show="repos[account].length == 0" class="alert alert-info" role="alert">There are no repos in "{{account}}".</div>
       <div class="list-group">
-        <a href="#" class="list-group-item" ng-repeat="repo in repos[account]">
+        <a ui-sref="projects.new.create({owner: repo.owner.login, repo: repo.name})" class="list-group-item" ng-repeat="repo in repos[account]">
           <h4 class="list-group-item-heading pull-left">{{repo.full_name}}</h4>
           <span class="label label-default pull-right" ng-if="repo.language">{{repo.language}}</span>
           <div class="clearfix"></div>
