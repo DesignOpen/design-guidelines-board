@@ -1,41 +1,9 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container">
   <div class="page-header">
     <h1>Add a Project <small>{{owner}}/{{repo}}</small></h1>
   </div>
   <div class="row">
-    <div class="col-lg-8">
-      <div class="dropdown">
-        <p>
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <i class="fa fa-users" ng-show="accountType == 'org'"></i>
-            <i class="fa fa-user" ng-show="accountType == 'user'"></i>
-            {{account}}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation" class="dropdown-header">Personal</li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="updateAccount(githubLogin)">{{githubLogin}}</a></li>
-            <li role="presentation" class="dropdown-header" ng-show="orgs">Organizations</li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-repeat="org in orgs" ng-click="updateAccount(org.login)">{{org.login}}</a></li>
-          </ul>
-        </p>
-      </div>
-      <div ng-include="'components/loading/loading.html'" ng-hide="repos[account]"></div>
-      <div ng-show="repos[account].length == 0" class="alert alert-info" role="alert">There are no repos in "{{account}}".</div>
-      <div class="list-group">
-        <a ui-sref="projects.new.create({owner: repo.owner.login, repo: repo.name})" class="list-group-item" ng-repeat="repo in repos[account]">
-          <h4 class="list-group-item-heading pull-left">{{repo.full_name}}</h4>
-          <span class="label label-default pull-right" ng-if="repo.language">{{repo.language}}</span>
-          <div class="clearfix"></div>
-          <p class="list-group-item-text">{{repo.description}}</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <p class="lead">Important Note!</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros lorem, gravida ut egestas in, egestas nec diam. Phasellus iaculis purus eu velit vulputate, pulvinar aliquam libero bibendum.</p>
-      <p>Ut et mauris sit amet nisi rhoncus faucibus vel quis felis. Duis massa urna, molestie in nulla quis, dapibus aliquam massa. Nulla suscipit cursus velit id sagittis. Praesent eu metus eget elit fringilla pulvinar.</p>
-      <p>Duis ac cursus ipsum. Vestibulum tincidunt laoreet mi. Ut neque neque, egestas malesuada ultricies vel, viverra nec mauris. Maecenas eu lorem ut massa interdum posuere in ut nulla.</p>
-    </div>
+    
   </div>
 </div>
