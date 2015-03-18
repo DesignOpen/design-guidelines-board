@@ -4,6 +4,32 @@
     <h1>Add a Project <small>{{owner}}/{{repo}}</small></h1>
   </div>
   <div class="row">
-    <pre ng-show="readme">{{readme}}</pre>
+    <div class="col-md-8">
+      <div ng-include="'components/loading/loading.html'" ng-hide="repoCheck"></div>
+      <div class="alert alert-warning" role="alert" ng-show="repoCheck && !repoCheck.hasDesign"><strong>Note:</strong> A design.md file must be present in your repository before your project listing will show up.</div>
+      <ul class="list-group" ng-show="repoCheck">
+        <li class="list-group-item">
+          <span class="badge"><span class="glyphicon" ng-class="{'glyphicon-ok': repoCheck.hasDesign, 'glyphicon-remove': !repoCheck.hasDesign}"></span></span>
+          <h4 class="list-group-item-heading">design.md</h4>
+          <p class="list-group-item-text">This file communicates to designers how they can contribute to your project.</p>
+        </li>
+        <li class="list-group-item">
+          <span class="badge"><span class="glyphicon" ng-class="{'glyphicon-ok': repoCheck.hasReadme, 'glyphicon-remove': !repoCheck.hasReadme}"></span></span>
+          <h4 class="list-group-item-heading">readme.md</h4>
+          <p class="list-group-item-text">This file gives an introduction to your project and is optional but recommended.</p>
+        </li>
+        <li class="list-group-item">
+          <span class="badge"><span class="glyphicon" ng-class="{'glyphicon-ok': repoCheck.hasContributing, 'glyphicon-remove': !repoCheck.hasContributing}"></span></span>
+          <h4 class="list-group-item-heading">contributing.md</h4>
+          <p class="list-group-item-text">This file gives guidelines on how people can contribute to your project.</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <p class="lead">Adding your Project</p>
+      <p>Clicking the button below adds a push hook to your repository. Your site may not be listed if the design.md file is removed.</p>
+      <hr>
+      <button class="btn btn-success btn-block btn-lg" ng-disabled="!repoCheck.hasDesign">Add Project</button>
+    </div>
   </div>
 </div>

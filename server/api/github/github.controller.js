@@ -64,7 +64,7 @@ exports.orgRepos = function(req, res, next) {
 /**
  * Get repo information
  */
-exports.getRepoReadme = function(req, res, next) {
+exports.checkRepo = function(req, res, next) {
   var userId = req.user._id;
   User.findOne({
     _id: userId
@@ -73,10 +73,27 @@ exports.getRepoReadme = function(req, res, next) {
     if (!user) return res.json(401);
     if (!user.github.accessToken) return res.json(401);
     var githubClient = github.client(user.github.accessToken);
-    githubClient.repo(req.params.owner + '/' + req.params.repo).readme(function(err, data, headers) {
+    githubClient.repo(req.params.owner + '/' + req.params.repo).contents('', function(err, data, headers) {
       if (err) return next(err);
-      var buffer = new Buffer(data.content, 'base64');
-      return res.json({readme: buffer.toString('utf8')});
+      var check = {
+        hasReadme: false,
+        hasDesign: false,
+        hasContributing: false
+      };
+      data.forEach(function(item) {
+        if(item.type == 'file') {
+          if(item.name.toLowerCase() == 'readme.md') {
+            check.hasReadme = true;
+          }
+          else if(item.name.toLowerCase() == 'design.md') {
+            check.hasDesign = true;
+          }
+          else if(item.name.toLowerCase() == 'contributing.md') {
+            check.hasContributing = true;
+          }
+        }
+      });
+      res.json(check);
     });
   });
 };
