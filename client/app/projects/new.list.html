@@ -16,7 +16,7 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li role="presentation" class="dropdown-header">Personal</li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="updateAccount(githubLogin)">{{githubLogin}}</a></li>
-            <li role="presentation" class="dropdown-header" ng-show="orgs">Organizations</li>
+            <li role="presentation" class="dropdown-header" ng-show="orgs && orgs.length > 0">Organizations</li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-repeat="org in orgs" ng-click="updateAccount(org.login)">{{org.login}}</a></li>
           </ul>
         </p>

@@ -10,5 +10,6 @@ var router = express.Router();
 router.get('/user/repos', auth.isAuthenticated(), controller.myRepos);
 router.get('/user/orgs', auth.isAuthenticated(), controller.myOrgs);
 router.get('/orgs/:org/repos', auth.isAuthenticated(), controller.orgRepos);
+router.get('/repo/:owner/:repo/readme', auth.isAuthenticated(), controller.getRepoReadme);
 
 module.exports = router;
