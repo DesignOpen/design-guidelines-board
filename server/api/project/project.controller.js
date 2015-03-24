@@ -73,7 +73,7 @@ exports.show = function (req, res, next) {
     repo: req.params.repo
   }, function(err, project) {
     if (err) return next(err);
-    if (!project) return res.json(401);
+    if (!project) return res.send(404);
     res.json(project);
   });
 };
