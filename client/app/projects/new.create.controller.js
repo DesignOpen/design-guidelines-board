@@ -10,4 +10,12 @@ angular.module('opendesignboardApp')
       }).error(function(data, status, headers, config) {
         $scope.repoCheck = {};
       });
+    $scope.addProject = function() {
+      $http.post('/api/project/', {owner: $scope.owner, repo: $scope.repo}).
+      success(function(data, status, headers, config) {
+        console.log(data);
+      }).error(function(data, status, headers, config) {
+        console.log(data);
+      });
+    };
   });
