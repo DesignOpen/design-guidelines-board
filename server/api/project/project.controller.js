@@ -5,6 +5,17 @@ var User = require('./../user/user.model');
 var github = require('octonode');
 var common = require('../common.js');
 
+
+/**
+ * List projects
+ */
+exports.index = function (req, res, next) {
+  Project.find({}, '-_id owner repo', function(err, projects) {
+    res.json(projects);
+  });
+};
+
+
 /**
  * Create a project
  */

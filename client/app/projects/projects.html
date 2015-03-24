@@ -1,3 +1,22 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-Hello world!
+<div class="container">
+  <div class="page-header">
+    <h1>Projects</h1>
+  </div>
+  <div ng-include="'components/loading/loading.html'" ng-hide="projects"></div>
+  <table class="table" ng-show="projects">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Project</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="project in projects">
+        <td>{{$index + 1}}</td>
+        <td>{{project.owner}}/{{project.repo}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
