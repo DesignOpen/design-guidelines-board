@@ -2,6 +2,7 @@
 
 var User = require('./../user/user.model');
 var github = require('octonode');
+var common = require('../common.js');
 
 
 /**
@@ -73,27 +74,16 @@ exports.checkRepo = function(req, res, next) {
     if (!user) return res.json(401);
     if (!user.github.accessToken) return res.json(401);
     var githubClient = github.client(user.github.accessToken);
-    githubClient.repo(req.params.owner + '/' + req.params.repo).contents('', function(err, data, headers) {
-      if (err) return next(err);
-      var check = {
-        hasReadme: false,
-        hasDesign: false,
-        hasContributing: false
-      };
-      data.forEach(function(item) {
-        if(item.type == 'file') {
-          if(item.name.toLowerCase() == 'readme.md') {
-            check.hasReadme = true;
-          }
-          else if(item.name.toLowerCase() == 'design.md') {
-            check.hasDesign = true;
-          }
-          else if(item.name.toLowerCase() == 'contributing.md') {
-            check.hasContributing = true;
-          }
-        }
-      });
-      res.json(check);
+    githubClient.repo(req.params.owner + '/' + req.params.repo).contents('CONTRIBUTING.md', function(err, data, headers) {
+      var response = {hasContributing: false, hasDesignSection: false};
+      if (err) return res.json(response);
+      response.hasContributing = true;
+      var buffer = new Buffer(data.content, data.encoding);
+      var data = buffer.toString();
+      if(common.getDesignSection(data)) {
+        response.hasDesignSection = true;
+      }
+      res.json(response);
     });
   });
 };
