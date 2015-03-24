@@ -13,6 +13,11 @@ angular.module('opendesignboardApp')
         templateUrl: 'app/projects/projects.html',
         controller: 'ProjectsCtrl'
       })
+      .state('projects.project', {
+        url: '/p/:owner/:repo',
+        templateUrl: 'app/projects/project.html',
+        controller: 'ProjectCtrl'
+      })
       .state('projects.new', {
         url: '/new',
         abstract: true,

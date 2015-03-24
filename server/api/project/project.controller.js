@@ -63,3 +63,17 @@ exports.create = function (req, res, next) {
     });
   });
 };
+
+/**
+ * Show project
+ */
+exports.show = function (req, res, next) {
+  Project.findOne({
+    owner: req.params.owner,
+    repo: req.params.repo
+  }, function(err, project) {
+    if (err) return next(err);
+    if (!project) return res.json(401);
+    res.json(project);
+  });
+};

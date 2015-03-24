@@ -15,7 +15,7 @@
     <tbody>
       <tr ng-repeat="project in projects">
         <td>{{$index + 1}}</td>
-        <td>{{project.owner}}/{{project.repo}}</td>
+        <td><a ui-sref="projects.project({owner: project.owner, repo: project.repo})">{{project.owner}}/{{project.repo}}</a></td>
       </tr>
     </tbody>
   </table>

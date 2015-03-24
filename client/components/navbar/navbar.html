@@ -14,7 +14,8 @@
         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/projects/new')}"><a href="/projects/new">Add Project</a></li>
+        <li ng-class="{active: $state.includes('projects') && !$state.includes('projects.new')}"><a href="/projects">Projects</a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: $state.includes('projects.new')}"><a href="/projects/new">Add Project</a></li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 

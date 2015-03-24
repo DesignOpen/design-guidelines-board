@@ -1,0 +1,10 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div class="page-header">
+    <h1>{{owner}}/{{repo}}</h1>
+  </div>
+  <div ng-include="'components/loading/loading.html'" ng-hide="project"></div>
+  <div ng-show="project" ng-bind-html="project.design"></div>
+  
+</div>
