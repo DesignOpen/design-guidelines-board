@@ -7,7 +7,7 @@ $navbar-designboard-link-color:                #939393;
 $navbar-designboard-link-hover-color:          #fff;
 $navbar-designboard-link-hover-bg:             transparent;
 $navbar-designboard-link-active-color:         #fff;
-$navbar-designboard-link-active-bg:            darken($navbar-designboard-bg, 6.5%);
+$navbar-designboard-link-active-bg:            darken($navbar-designboard-bg, 0%);
 $navbar-designboard-link-disabled-color:       #ccc;
 $navbar-designboard-link-disabled-bg:          transparent;
 
@@ -49,6 +49,18 @@ $navbar-designboard-toggle-border-color:       #777;
     line-height: 15px;
     margin-top: -5px;
     margin-left: 0;
+  }
+
+  .nav > li > a {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .avatar {
+    padding: 0;
+    line-height: $navbar-height;
+    img {
+      box-shadow: 0 0 0 4px #333, 0 0 0 7px #4e4d4d;
+    }
   }
 }
 
