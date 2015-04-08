@@ -54,9 +54,11 @@ $navbar-designboard-toggle-border-color:       #777;
       &:focus {
         color: $navbar-designboard-link-active-color;
         background-color: $navbar-designboard-link-active-bg;
-        background-image: url(../assets/images/arrow.png);
-        background-repeat: no-repeat;
-        background-position: center bottom;
+        @media (min-width: $grid-float-breakpoint) {
+          background-image: url(../assets/images/arrow.png);
+          background-repeat: no-repeat;
+          background-position: center bottom;
+        }
       }
     }
     > .disabled > a {
