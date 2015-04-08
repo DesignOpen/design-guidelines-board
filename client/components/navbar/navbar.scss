@@ -12,7 +12,7 @@ $navbar-designboard-link-disabled-color:       #ccc;
 $navbar-designboard-link-disabled-bg:          transparent;
 
 // Navbar brand label
-$navbar-designboard-brand-color:               $navbar-designboard-link-color;
+$navbar-designboard-brand-color:               #eee;
 $navbar-designboard-brand-hover-color:         darken($navbar-designboard-brand-color, 10%);
 $navbar-designboard-brand-hover-bg:            transparent;
 
@@ -20,6 +20,37 @@ $navbar-designboard-brand-hover-bg:            transparent;
 $navbar-designboard-toggle-hover-bg:           #555;
 $navbar-designboard-toggle-icon-bar-bg:        #888;
 $navbar-designboard-toggle-border-color:       #777;
+
+.navbar {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  .logo {
+    width: $navbar-height;
+    height: $navbar-height;
+    padding: 25px;
+    margin-right: -25px;
+    @media (min-width: $grid-float-breakpoint) {
+      margin-left: -25px;
+    }
+    float: left;
+  }
+  .sep {
+    float: left;
+    border-left: 1px solid #555;
+    height: 40px;
+    margin: 0 22px;
+    margin-top: ($navbar-height - 40px) / 2;
+  }
+  .navbar-brand {
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 15px;
+    margin-top: -5px;
+    margin-left: 0;
+  }
+}
 
 .navbar-designboard {
   background-color: $navbar-designboard-bg;
