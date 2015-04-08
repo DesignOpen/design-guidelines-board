@@ -60,6 +60,13 @@ $navbar-designboard-toggle-border-color:       #777;
     line-height: $navbar-height;
     img {
       box-shadow: 0 0 0 4px #333, 0 0 0 7px #4e4d4d;
+      opacity: .9;
+    }
+    &:hover {
+      img {
+        opacity: 1;
+        box-shadow: 0 0 0 4px #333, 0 0 0 7px #555;
+      }
     }
   }
 }

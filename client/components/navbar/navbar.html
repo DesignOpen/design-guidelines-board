@@ -16,8 +16,8 @@
         <li ng-class="{active: $state.includes('projects') && !$state.includes('projects.new')}"><a href="/projects">Projects</a></li>
         <li ng-show="isLoggedIn()" ng-class="{active: $state.includes('projects.new')}"><a href="/projects/new">Add Project</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><a href="" ng-click="logout()">Logout</a></li>
-        <li ng-show="isLoggedIn()"><a href="" ng-click="logout()" class="avatar"><img ng-src="{{avatar_url(35)}}" class="img-circle" width="35" height="35"></a></li>
+        <li ng-show="isLoggedIn()" class="visible-xs"><a href="" ng-click="logout()">Logout</a></li>
+        <li ng-show="isLoggedIn()" class="hidden-xs"><a href="" title="Hello {{getCurrentUser().name}}, click to logout..." ng-click="logout()" class="avatar"><img ng-src="{{avatar_url(35)}}" class="img-circle" width="35" height="35"></a></li>
       </ul>
     </div>
   </div>
