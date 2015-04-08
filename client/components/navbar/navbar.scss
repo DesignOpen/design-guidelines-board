@@ -27,6 +27,7 @@ $navbar-designboard-toggle-border-color:       #777;
   font-weight: 600;
   font-size: 12px;
   .logo {
+    float: left;
     width: $navbar-height;
     height: $navbar-height;
     padding: 25px;
@@ -34,7 +35,9 @@ $navbar-designboard-toggle-border-color:       #777;
     @media (min-width: $grid-float-breakpoint) {
       margin-left: -25px;
     }
-    float: left;
+    a:hover svg g {
+      fill: #f5f58f;
+    }
   }
   .sep {
     float: left;
