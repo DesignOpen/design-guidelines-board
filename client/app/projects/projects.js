@@ -26,11 +26,13 @@ angular.module('opendesignboardApp')
       .state('projects.new.list', {
         url: '',
         templateUrl: 'app/projects/new.list.html',
-        controller: 'ProjectNewListCtrl'
+        controller: 'ProjectNewListCtrl',
+        authenticate: true
       })
       .state('projects.new.create', {
         url: '/:owner/:repo',
         templateUrl: 'app/projects/new.create.html',
-        controller: 'ProjectNewCreateCtrl'
+        controller: 'ProjectNewCreateCtrl',
+        authenticate: true
       });
   });
