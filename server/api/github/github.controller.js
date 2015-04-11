@@ -69,6 +69,11 @@ exports.orgRepos = function(req, res, next) {
  */
 exports.checkRepo = function(req, res, next) {
   var userId = req.user._id;
+  var owner = req.params.owner;
+  var repo = req.params.repo;
+  var projectExists = Q.nfcall(Project.count.bind(Project), {owner: owner, repo: repo}).then(function(count){
+    return count == 1;
+  });
   var user = Q.nfcall(User.findOne.bind(User), {_id: userId});
   var accessToken = user.then(function(user) {
     if (!user || !user.github || !user.github.accessToken) throw new Error('Cannot get access token');
@@ -77,20 +82,21 @@ exports.checkRepo = function(req, res, next) {
   var githubClient = accessToken.then(function(accessToken) {
     return github.client(accessToken);
   });
-  var checkRepo = githubClient.then(function(githubClient) {
-    var repo = githubClient.repo(req.params.owner + '/' + req.params.repo);
-    return Q.nfcall(repo.contents.bind(repo), 'CONTRIBUTING.md').spread(function(data, headers) {
+  var repoStatus = githubClient.then(function(githubClient) {
+    var ghrepo = githubClient.repo(owner + '/' + repo);
+    return Q.nfcall(ghrepo.contents.bind(ghrepo), 'CONTRIBUTING.md').spread(function(data, headers) {
       var buffer = new Buffer(data.content, data.encoding);
       var data = buffer.toString();
-      return [true, common.getDesignSection(data) != null];
+      return {hasContributing: true, hasDesignSection: common.getDesignSection(data) != null};
     }, function() {
-      return [false, false];
+      return {hasContributing: false, hasDesignSection: false};
     });
   });
-  checkRepo.spread(function(hasContributing, hasDesignSection) {
+  Q.all([repoStatus, projectExists]).spread(function(repoStatus, projectExists) {
     return res.json({
-      hasContributing: hasContributing,
-      hasDesignSection: hasDesignSection
+      hasContributing: repoStatus.hasContributing,
+      hasDesignSection: repoStatus.hasDesignSection,
+      projectExists: projectExists
     });
   }, function(err) {
     next(err);
