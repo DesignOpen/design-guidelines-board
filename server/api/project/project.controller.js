@@ -5,6 +5,8 @@ var User = require('./../user/user.model');
 var github = require('octonode');
 var common = require('../common.js');
 var cache = require('rediscache');
+var Q = require("q");
+
 
 cache.connect().configure({
     expiry: 86400
@@ -25,26 +27,45 @@ exports.index = function (req, res, next) {
  */
 exports.create = function (req, res, next) {
   var userId = req.user._id;
+  var owner = req.body.owner;
+  var repo = req.body.repo;
 
   // Check if project already exists
   Project.findOne({
-    owner: req.body.owner,
-    repo: req.body.repo
+    owner: owner,
+    repo: repo
   }, function(err, project) {
     if (project) return res.json(project);
 
-    // Check repo ownership
-    // TODO
+    // Check repo permission
+    var user = Q.nfcall(User.findOne.bind(User), {_id: userId});
+    var accessToken = user.then(function(user) {
+      if (!user || !user.github || !user.github.accessToken) throw new Error('Cannot get access token');
+      return user.github.accessToken;
+    });
+    var githubClient = accessToken.then(function(accessToken) {
+      return github.client(accessToken);
+    });
+    var repoPermissions = githubClient.then(function(githubClient) {
+      var ghrepo = githubClient.repo(owner + '/' + repo);
+      return Q.nfcall(ghrepo.info.bind(ghrepo)).spread(function(data, headers) {
+        return data.permissions;
+      });
+    });
+    
+    repoPermissions.then(function(repoPermissions) {
+      if (!repoPermissions.admin) next(new Error('User does not have admin permission for repo'));
 
-    var project = {
-      owner: req.body.owner,
-      repo: req.body.repo,
-      createdBy: userId
-    };
+      var project = {
+        owner: owner,
+        repo: repo,
+        createdBy: userId
+      };
 
-    Project.create(project, function (err, project) {
-      if (err) return next(err);
-      res.json(project);
+      Project.create(project, function (err, project) {
+        if (err) return next(err);
+        res.json(project);
+      });
     });
 
   });
