@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-4">
       <p class="lead">Adding your Project</p>
-      <p>Clicking the button below adds a push hook to your repository. Your site may not be listed if the design.md file is removed.</p>
+      <p>Clicking the button below will list your project on the board. Your project listing may removed if the Design Section in contributing.md it not present.</p>
       <hr>
       <button class="btn btn-default btn-block btn-lg" disabled="true" ng-show="!repoCheck">Checking...</button>
       <button class="btn btn-success btn-block btn-lg" ng-disabled="!repoCheck.hasDesignSection" ng-click="addProject()" ng-show="repoCheck.projectExists == false">Add Project</button>
