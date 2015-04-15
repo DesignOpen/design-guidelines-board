@@ -6,5 +6,6 @@
   </div>
   <div ng-include="'components/loading/loading.html'" ng-hide="project"></div>
   <div ng-show="project" ng-bind-html="project.design"></div>
-  
+  <br>
+  <a href="https://github.com/{{owner}}/{{repo}}/blob/master/CONTRIBUTING.md" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-new-window"></span> Project Contribution Guidelines</a>
 </div>
